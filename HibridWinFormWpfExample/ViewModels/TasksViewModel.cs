@@ -80,6 +80,7 @@ namespace HibridWinFormWpfExample.ViewModels
                         try
                         {
                             _repository.Delete(SelectedTask.Id);
+                            _repository.Save();
                             Tasks.Remove(SelectedTask);
                         }
                         catch (Exception e)
