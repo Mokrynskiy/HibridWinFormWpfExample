@@ -14,7 +14,8 @@ namespace HibridWinFormWpfExample.Data.Abstract
         public T Add(T entity) => _context.Set<T>().Add(entity);       
 
         public void Delete(T entity) => _context.Set<T>().Remove(entity);
-        
+        public void Delete(int id) => _context.Set<T>().Remove(GetById(id));
+
         public T GetById(int id) => _context.Set<T>().FirstOrDefault(x => x.Id == id);
 
         public IEnumerable<T> GetAll() => _context.Set<T>();       

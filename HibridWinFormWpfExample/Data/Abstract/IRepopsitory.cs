@@ -7,6 +7,7 @@ namespace HibridWinFormWpfExample.Data.Abstract
         IEnumerable<T> GetAll();
         T Add(T entity);
         void Delete(T entity);
+        void Delete(int id);
         T GetById(int id);
         void Save();
     }

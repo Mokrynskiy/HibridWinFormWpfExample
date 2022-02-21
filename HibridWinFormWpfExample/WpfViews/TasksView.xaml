@@ -10,64 +10,63 @@
     <UserControl.DataContext>
         <vm:TasksViewModel/>
     </UserControl.DataContext>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <Grid>        
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>            
             <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Border>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Задача" Grid.Row="0" Grid.Column="0"/>
-                <TextBlock Text="Дата создания" Grid.Row="1" Grid.Column="0"/>
-                <TextBlock Text="Срок выподнения до:" Grid.Row="2" Grid.Column="0"/>
-                <TextBlock Text="Дата выполнения" Grid.Row="3" Grid.Column="0"/>
-                <TextBox Text="Задача" Grid.Row="0" Grid.Column="1"/>
-                <DatePicker Grid.Row="1" Grid.Column="1"/>
-                <DatePicker Grid.Row="2" Grid.Column="1"/>
-                <DatePicker Grid.Row="3" Grid.Column="1"/>
-            </Grid>
-        </Border>
-        <RichTextBox Grid.Column="1" Grid.Row="0"/>
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Button Content="Добавить"/>
-            <Button Content="Редактировать"/>
-            <Button Content="Удалить"/>
+        </Grid.RowDefinitions>  
+                     
+        <StackPanel Grid.Row="0" Grid.Column="0"  Orientation="Horizontal" Margin="5">
+            <Button  Margin="5" Width="{Binding ElementName=EditButton, Path=ActualWidth}" Command="{Binding AddCommand}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/add.png"/>
+                        <TextBlock Text="Добавить" VerticalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button x:Name="EditButton" Margin="5" Command="{Binding EditCommand}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/edit.png"/>
+                        <TextBlock Text="Редактировать" VerticalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Margin="5" Width="{Binding ElementName=EditButton, Path=ActualWidth}" Command="{Binding DeleteCommand}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/delete.png"/>
+                        <TextBlock Text="Удалить" VerticalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
         </StackPanel>
-        <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Tasks}">
+        <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Tasks}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTask}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" SelectionMode="Single" RowDetailsVisibilityMode="Collapsed" Margin="5">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding TaskTitle}">
+                <DataGridTextColumn Binding="{Binding TaskTitle}" IsReadOnly="True">
                     <DataGridTextColumn.Header>
                         <TextBlock Text="Задача"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding CreateDate}">
+                <DataGridTextColumn Binding="{Binding CreateDate}" IsReadOnly="True">
                     <DataGridTextColumn.Header>
                         <TextBlock Text="Дата создания"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding DueDate}">
+                <DataGridTextColumn Binding="{Binding DueDate}" IsReadOnly="True">
                     <DataGridTextColumn.Header>
                         <TextBlock Text="Срок выполнения"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding CompletionDate}">
+                <DataGridTextColumn Binding="{Binding CompletionDate}" IsReadOnly="True">
                     <DataGridTextColumn.Header>
                         <TextBlock Text="Дата завершения"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding TaskDiscription}" Width="*" IsReadOnly="True">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Описание задачи"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
             </DataGrid.Columns>
